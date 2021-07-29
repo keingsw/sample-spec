@@ -10,13 +10,13 @@ jobs:
         uses: keingsw/spec-generator-github-actions@v0.1
         with:
           accessToken: ${{ secrets.GITHUB_TOKEN }}
-            repository: ${{ github.repository }}
-            branchRef: ${{ github.event.ref }}
-            specDir: "spec"
-            outputDir: "."
-            outputFilename: "spec.pdf"
-            chapterContentsFilename: "_contents.md"
-            chapterIndexFilename: "_index.md"
+          repository: ${{ github.repository }}
+          branchRef: ${{ github.event.ref }}
+          specDir: "spec"
+          outputDir: "."
+          outputFilename: "spec.pdf"
+          chapterContentsFilename: "_contents.md"
+          chapterIndexFilename: "_index.md"
       - run: echo "${{ steps.generate.outputs.pdfPath }}"
       - uses: actions/upload-artifact@v2
         with:
