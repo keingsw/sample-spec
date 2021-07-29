@@ -1,0 +1,23 @@
+name: Generate Spec PDF
+on:
+  workflow_dispatch:
+jobs:
+  generatePDF:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: generate
+        uses: keingsw/spec-generator-github-actions@v0.1
+        with:
+          accessToken: ${{ secrets.GITHUB_TOKEN }}
+            repository: ${{ github.repository }}
+            branchRef: ${{ github.event.ref }}
+            specDir: "spec"
+            outputDir: "."
+            outputFilename: "spec.pdf"
+            chapterContentsFilename: "_contents.md"
+            chapterIndexFilename: "_index.md"
+      - run: echo "${{ steps.generate.outputs.pdfPath }}"
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ${{ steps.generate.outputs.pdfPath }}
